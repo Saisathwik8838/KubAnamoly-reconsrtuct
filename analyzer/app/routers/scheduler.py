@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime,timezone
 import json
 router=APIRouter()
-ROOT=Path(__file__).resolve().parents[4]; HISTORY=ROOT/"detection_history.jsonl"
+ROOT=Path(__file__).resolve().parents[3]; HISTORY=ROOT/"detection_history.jsonl"
 def append_history(record):
     row={**record,"recorded_at":datetime.now(timezone.utc).isoformat()}
     with HISTORY.open("a",encoding="utf-8") as f: f.write(json.dumps(row,default=str)+"\n")

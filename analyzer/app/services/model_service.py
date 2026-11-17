@@ -1,6 +1,6 @@
 from pathlib import Path
 import numpy as np, joblib
-ROOT=Path(__file__).resolve().parents[4]
+ROOT=Path(__file__).resolve().parents[3]
 MODEL_DIR=ROOT/"models"
 _models={}
 def load_models():

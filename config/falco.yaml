@@ -1,0 +1,31 @@
+# Falco Configuration for KubAnomaly (Section V-B, VI-A)
+# Sets up modern eBPF driver and JSON file output for kubanomaly_agent.py
+
+# Driver configuration: modern eBPF
+engine:
+  kind: modern_ebpf
+
+# JSON Output configuration
+json_output: true
+json_include_output_property: true
+json_include_tags_property: true
+
+# File output: events read by kubanomaly_agent.py
+file_output:
+  enabled: true
+  keep_alive: true
+  filename: /var/log/falco/events.json
+
+# Syslog / Stdout settings
+stdout_output:
+  enabled: false
+syslog_output:
+  enabled: false
+
+# Custom rule file inclusion
+rules_files:
+  - /etc/falco/falco_rules.yaml
+  - /etc/falco/rules.d/falco-custom-rules.yaml
+
+time_format_iso_8601: true
+priority: notice

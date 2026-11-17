@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  center:
+    build:
+      context: .
+      dockerfile: analyzer/Dockerfile
+    container_name: kubanomaly-center
+    ports:
+      - "8003:8003"
+    volumes:
+      - ./models:/app/models
+      - ./detection_history.jsonl:/app/detection_history.jsonl
+    restart: unless-stopped
+
+  agent:
+    build:
+      context: .
+      dockerfile: agent/Dockerfile
+    container_name: kubanomaly-agent
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/log/falco/events.json:/var/log/falco/events.json:ro
+    environment:
+      - CENTER_URL=http://center:8003
+      - FALCO_LOG=/var/log/falco/events.json
+    depends_on:
+      - center
+    restart: unless-stopped
