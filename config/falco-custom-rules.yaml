@@ -1,0 +1,7 @@
+- rule: KubAnomaly Syscall Capture
+  desc: Selected runtime events for the reconstructed prototype
+  condition: evt.type in (execve, execveat, openat, open, mkdir, mkdirat, mmap, munmap, brk, connect, accept, accept4, poll, ppoll, select, pselect6, read, write, clone, clone3, rename, renameat, chdir, fchdir, sendmsg, recvmsg, sendto, recvfrom)
+  output: KubAnomaly syscall capture (evt=%evt.type proc=%proc.name container=%container.name container_id=%container.id)
+  priority: NOTICE
+  source: syscall
+  tags: [container, kubanomaly]

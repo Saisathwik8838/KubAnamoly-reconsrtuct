@@ -1,0 +1,1 @@
+__pycache__/\n*.py[cod]\n.venv/\nvenv/\n.env\nmodels/*.keras\nmodels/*.joblib\ndata/\ndetection_history.jsonl\n
